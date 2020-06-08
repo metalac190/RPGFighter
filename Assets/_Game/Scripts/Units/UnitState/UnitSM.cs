@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSM : MonoBehaviour
+public class UnitSM : StateMachine
 {
     public UnitIdleState UnitIdleState { get; private set; }
     public UnitAttackingState UnitAttackingState { get; private set; }
@@ -15,6 +15,17 @@ public class UnitSM : MonoBehaviour
     private void Awake()
     {
         // set up states
-        
+        UnitIdleState = new UnitIdleState(this);
+        UnitAttackingState = new UnitAttackingState(this);
+        UnitPreparingState = new UnitPreparingState(this);
+        UnitDefendingState = new UnitDefendingState(this);
+        UnitReadyState = new UnitReadyState(this);
+        UnitCastingState = new UnitCastingState(this);
+        UnitKOState = new UnitKOState(this);
+    }
+
+    private void Start()
+    {
+        ChangeState(UnitIdleState);
     }
 }
