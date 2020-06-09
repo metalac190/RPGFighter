@@ -10,12 +10,13 @@ public class ActionGauge : MonoBehaviour
     public event Action OnGaugeEmptied = delegate { };
 
     float _currentValue = 0;
-    public float CurrentValue {
-        get => _currentValue;
-        private set
+    public float CurrentValue => _currentValue;
+    // this is our current value from 0-1 scale
+    public float CurrentValueNormalized
+    {
+        get
         {
-            value = Mathf.Clamp(value, 0, MaxValue);
-            _currentValue = value;
+            return (1 / MaxValue) * _currentValue;
         }
     }
 
@@ -25,9 +26,16 @@ public class ActionGauge : MonoBehaviour
     public float FillSpeed { get; private set; } = 10;
     public bool IsActive { get; private set; } = true;
 
-    private void Awake()
+    public void Init(float maxValue, float fillSpeed, float startingValue)
     {
-        CurrentValue = StartingValue;
+        MaxValue = maxValue;
+        FillSpeed = fillSpeed;
+        StartingValue = startingValue;
+    }
+
+    private void Start()
+    {
+        SetGauge(StartingValue);
     }
 
     void Update()
@@ -38,34 +46,32 @@ public class ActionGauge : MonoBehaviour
         }
     }
 
-    private void IncreaseGauge(float amount)
+    public void IncreaseGauge(float amount)
     {
-        CurrentValue += amount;
-        OnGaugeChanged.Invoke(CurrentValue);
-
-        // check if we're just now filled for the first time
-        if (CurrentValue >= MaxValue)
-        {
-            OnGaugeFilled.Invoke();
-        }
+        float newValue = CurrentValue + amount;
+        SetGauge(newValue);
     }
 
-    private void DecreaseGauge(float amount)
+    public void DecreaseGauge(float amount)
     {
-        CurrentValue -= amount;
-        OnGaugeChanged.Invoke(CurrentValue);
+        float newValue = CurrentValue - amount;
+        SetGauge(newValue);
+    }
 
-        // check to see if we just emptied for the first time
+    public void SetGauge(float amount)
+    {
+        amount = Mathf.Clamp(amount, 0, MaxValue);
+        _currentValue = amount;
+
+        OnGaugeChanged.Invoke(CurrentValue);
+        // check other event conditions
         if(CurrentValue == 0)
         {
             OnGaugeEmptied.Invoke();
         }
-    }
-
-    private void EmptyGauge()
-    {
-        CurrentValue = 0;
-        OnGaugeChanged.Invoke(CurrentValue);
-        OnGaugeEmptied.Invoke();
+        else if(CurrentValue == MaxValue)
+        {
+            OnGaugeFilled.Invoke();
+        }
     }
 }

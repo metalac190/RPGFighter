@@ -9,6 +9,9 @@ public class ActionGaugeView : MonoBehaviour
     [SerializeField] Vector3 _displayOffset = new Vector3(0, 0, 0); // adjusts after runtime
     [SerializeField] Image _fillImgView = null;
 
+    [SerializeField] Color _fillingColor;
+    [SerializeField] Color _fullColor;
+
     ActionGauge _actionGauge = null;
 
     private void Awake()
@@ -22,21 +25,30 @@ public class ActionGaugeView : MonoBehaviour
     {
         _actionGauge.OnGaugeFilled += HandleGaugeFilled;
         _actionGauge.OnGaugeChanged += HandleGaugeChanged;
+        _actionGauge.OnGaugeEmptied += HandleGaugeEmptied;
     }
 
     private void OnDisable()
     {
         _actionGauge.OnGaugeFilled -= HandleGaugeFilled;
         _actionGauge.OnGaugeChanged -= HandleGaugeChanged;
+        _actionGauge.OnGaugeEmptied -= HandleGaugeEmptied;
     }
 
     void HandleGaugeFilled()
     {
-        //TODO display visual here
+        _fillImgView.color = _fullColor;
     }
 
     void HandleGaugeChanged(float currentValue)
     {
-        //TODO display current value
+        // fill amount is 1 max, so use normalized value (0 to 1 converted)
+        _fillImgView.fillAmount = _actionGauge.CurrentValueNormalized;
+        _fillImgView.color = _fillingColor;
+    }
+
+    void HandleGaugeEmptied()
+    {
+        _fillImgView.color = _fillingColor;
     }
 }
