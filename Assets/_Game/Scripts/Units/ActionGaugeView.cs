@@ -9,8 +9,8 @@ public class ActionGaugeView : MonoBehaviour
     [SerializeField] Vector3 _displayOffset = new Vector3(0, 0, 0); // adjusts after runtime
     [SerializeField] Image _fillImgView = null;
 
-    [SerializeField] Color _fillingColor;
-    [SerializeField] Color _fullColor;
+    [SerializeField] Color _fillingColor = Color.yellow;
+    [SerializeField] Color _fullColor = Color.green;
 
     ActionGauge _actionGauge = null;
 

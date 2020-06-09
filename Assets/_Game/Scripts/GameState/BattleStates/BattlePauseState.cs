@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class BattlePauseState : IState
 {
-    BattleSM _stateMachine;
+    private BattleSM _stateMachine = null;
+    private Controls _input = null;
 
-    public BattlePauseState(BattleSM stateMachine)
+    public BattlePauseState(BattleSM stateMachine, Controls input)
     {
         _stateMachine = stateMachine;
+        _input = input;
     }
 
     public void Enter()
     {
-        throw new System.NotImplementedException();
+        Time.timeScale = 0;
+        _input.Combat.Pause.performed += ctx => HandlePause();
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        Time.timeScale = 1;
+        _input.Combat.Pause.performed -= ctx => HandlePause();
     }
 
     public void Tick()
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    void HandlePause()
+    {
+        _stateMachine.ChangeStateToPrevious();
     }
 }

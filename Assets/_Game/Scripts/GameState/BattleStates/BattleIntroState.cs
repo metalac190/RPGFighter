@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BattleIntroState : IState
 {
-    BattleSM _stateMachine;
+    BattleSM _stateMachine = null;
+    Coroutine _introRoutine = null;
+
+    float _introDelay = 1.5f;
 
     public BattleIntroState(BattleSM stateMachine)
     {
@@ -13,7 +16,9 @@ public class BattleIntroState : IState
 
     public void Enter()
     {
-        Debug.Log("ENTER: Battle Intro");
+        Debug.Log("STATE: Battle Intro");
+        Timer.DelayActionRetriggerable
+            (_stateMachine, ExitIntro, _introDelay, _introRoutine);
     }
 
     public void Exit()
@@ -23,6 +28,11 @@ public class BattleIntroState : IState
 
     public void Tick()
     {
-        Debug.Log("EXIT: Battle Intro");
+        
+    }
+
+    void ExitIntro()
+    {
+        _stateMachine.ChangeState(_stateMachine.BattleCombatState);
     }
 }

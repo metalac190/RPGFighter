@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleSM : StateMachine
 {
+    [SerializeField] InputController _input = null;
+    InputController Input => _input;
     // states
     public BattleIntroState BattleIntroState { get; private set; }
     public BattleCombatState BattleCombatState { get; private set; }
@@ -15,8 +17,8 @@ public class BattleSM : StateMachine
     {
         // setup state machines
         BattleIntroState = new BattleIntroState(this);
-        BattleCombatState = new BattleCombatState(this);
-        BattlePauseState = new BattlePauseState(this);
+        BattleCombatState = new BattleCombatState(this, Input.Controls);
+        BattlePauseState = new BattlePauseState(this, Input.Controls);
         BattleMenuSelectState = new BattleMenuSelectState(this);
         BattleAbilitySelectState = new BattleAbilitySelectState(this);
     }
