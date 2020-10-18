@@ -31,6 +31,6 @@ public class UnitActionIdleState : IState
 
     void HandleGaugeFilled()
     {
-        _stateMachine.ChangeState(_stateMachine.UnitActionReadyState);
+        _stateMachine.ChangeState(_stateMachine.ReadyState);
     }
 }

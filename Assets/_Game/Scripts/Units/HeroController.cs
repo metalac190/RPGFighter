@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
-    UnitActionSM _unitSM = null;
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        _unitSM = GetComponent<UnitActionSM>();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
