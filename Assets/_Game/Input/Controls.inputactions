@@ -44,6 +44,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MoveSelectUp",
+                    "type": "Button",
+                    "id": "0eeb482e-8d20-48e5-8f61-8a896b35cb94",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveSelectDown",
+                    "type": "Button",
+                    "id": "ec21b4e5-a91d-434f-ba6a-340bdd4c72a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveSelectLeft",
+                    "type": "Button",
+                    "id": "2fda3455-1b39-4908-b792-7a67cb4a1933",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveSelectRight",
+                    "type": "Button",
+                    "id": "f364b82d-f30e-4f41-8897-04c18e87e005",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -99,6 +131,50 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20a973fd-96f7-4ed6-b59c-75f9de4a9200",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "MoveSelectUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba5cc4ed-a236-4b0e-9a76-5fadb9e8edfe",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "MoveSelectDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cd75963-b24e-4c00-9487-0c8a34d9b326",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "MoveSelectLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cd38d50-1f6b-4ef6-a4e5-7cc6d3cb3454",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "MoveSelectRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

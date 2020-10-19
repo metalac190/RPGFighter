@@ -5,13 +5,16 @@ using UnityEngine;
 public class BattleIntroState : IState
 {
     BattleSM _stateMachine = null;
+    BattleUnitSpawner _spawner = null;
+
     Coroutine _introRoutine = null;
 
     float _introDelay = 1.5f;
 
-    public BattleIntroState(BattleSM stateMachine)
+    public BattleIntroState(BattleSM stateMachine, BattleUnitSpawner spawner)
     {
         _stateMachine = stateMachine;
+        _spawner = spawner;
     }
 
     public void Enter()
@@ -19,6 +22,8 @@ public class BattleIntroState : IState
         Debug.Log("STATE: Battle Intro");
         Timer.DelayActionRetriggerable
             (_stateMachine, ExitIntro, _introDelay, _introRoutine);
+        //_spawner.SpawnHeroes();
+        //_spawner.SpawnEnemies();
     }
 
     public void Exit()

@@ -57,6 +57,38 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveSelectUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""0eeb482e-8d20-48e5-8f61-8a896b35cb94"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveSelectDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec21b4e5-a91d-434f-ba6a-340bdd4c72a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveSelectLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fda3455-1b39-4908-b792-7a67cb4a1933"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveSelectRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""f364b82d-f30e-4f41-8897-04c18e87e005"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -114,6 +146,50 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20a973fd-96f7-4ed6-b59c-75f9de4a9200"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""MoveSelectUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba5cc4ed-a236-4b0e-9a76-5fadb9e8edfe"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""MoveSelectDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cd75963-b24e-4c00-9487-0c8a34d9b326"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""MoveSelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cd38d50-1f6b-4ef6-a4e5-7cc6d3cb3454"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""MoveSelectRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +220,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Combat_Attack03 = m_Combat.FindAction("Attack03", throwIfNotFound: true);
         m_Combat_Attack04 = m_Combat.FindAction("Attack04", throwIfNotFound: true);
         m_Combat_Pause = m_Combat.FindAction("Pause", throwIfNotFound: true);
+        m_Combat_MoveSelectUp = m_Combat.FindAction("MoveSelectUp", throwIfNotFound: true);
+        m_Combat_MoveSelectDown = m_Combat.FindAction("MoveSelectDown", throwIfNotFound: true);
+        m_Combat_MoveSelectLeft = m_Combat.FindAction("MoveSelectLeft", throwIfNotFound: true);
+        m_Combat_MoveSelectRight = m_Combat.FindAction("MoveSelectRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -198,6 +278,10 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Combat_Attack03;
     private readonly InputAction m_Combat_Attack04;
     private readonly InputAction m_Combat_Pause;
+    private readonly InputAction m_Combat_MoveSelectUp;
+    private readonly InputAction m_Combat_MoveSelectDown;
+    private readonly InputAction m_Combat_MoveSelectLeft;
+    private readonly InputAction m_Combat_MoveSelectRight;
     public struct CombatActions
     {
         private @Controls m_Wrapper;
@@ -207,6 +291,10 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Attack03 => m_Wrapper.m_Combat_Attack03;
         public InputAction @Attack04 => m_Wrapper.m_Combat_Attack04;
         public InputAction @Pause => m_Wrapper.m_Combat_Pause;
+        public InputAction @MoveSelectUp => m_Wrapper.m_Combat_MoveSelectUp;
+        public InputAction @MoveSelectDown => m_Wrapper.m_Combat_MoveSelectDown;
+        public InputAction @MoveSelectLeft => m_Wrapper.m_Combat_MoveSelectLeft;
+        public InputAction @MoveSelectRight => m_Wrapper.m_Combat_MoveSelectRight;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -231,6 +319,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnPause;
+                @MoveSelectUp.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectUp;
+                @MoveSelectUp.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectUp;
+                @MoveSelectUp.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectUp;
+                @MoveSelectDown.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectDown;
+                @MoveSelectDown.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectDown;
+                @MoveSelectDown.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectDown;
+                @MoveSelectLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectLeft;
+                @MoveSelectLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectLeft;
+                @MoveSelectLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectLeft;
+                @MoveSelectRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectRight;
+                @MoveSelectRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectRight;
+                @MoveSelectRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnMoveSelectRight;
             }
             m_Wrapper.m_CombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -250,6 +350,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @MoveSelectUp.started += instance.OnMoveSelectUp;
+                @MoveSelectUp.performed += instance.OnMoveSelectUp;
+                @MoveSelectUp.canceled += instance.OnMoveSelectUp;
+                @MoveSelectDown.started += instance.OnMoveSelectDown;
+                @MoveSelectDown.performed += instance.OnMoveSelectDown;
+                @MoveSelectDown.canceled += instance.OnMoveSelectDown;
+                @MoveSelectLeft.started += instance.OnMoveSelectLeft;
+                @MoveSelectLeft.performed += instance.OnMoveSelectLeft;
+                @MoveSelectLeft.canceled += instance.OnMoveSelectLeft;
+                @MoveSelectRight.started += instance.OnMoveSelectRight;
+                @MoveSelectRight.performed += instance.OnMoveSelectRight;
+                @MoveSelectRight.canceled += instance.OnMoveSelectRight;
             }
         }
     }
@@ -270,5 +382,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnAttack03(InputAction.CallbackContext context);
         void OnAttack04(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMoveSelectUp(InputAction.CallbackContext context);
+        void OnMoveSelectDown(InputAction.CallbackContext context);
+        void OnMoveSelectLeft(InputAction.CallbackContext context);
+        void OnMoveSelectRight(InputAction.CallbackContext context);
     }
 }

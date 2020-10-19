@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 public class BattleCombatState : IState
@@ -16,20 +17,32 @@ public class BattleCombatState : IState
     public void Enter()
     {
         Debug.Log("STATE: Battle Combat");
-        _input.Combat.Attack01.performed += ctx => HandleAttack01();
-        _input.Combat.Attack02.performed += ctx => HandleAttack02();
-        _input.Combat.Attack03.performed += ctx => HandleAttack03();
-        _input.Combat.Attack04.performed += ctx => HandleAttack04();
-        _input.Combat.Pause.performed += ctx => HandlePause();
+        _input.Combat.Attack01.performed += ctx => OnAttack01Performed();
+        _input.Combat.Attack02.performed += ctx => OnAttack02Performed();
+        _input.Combat.Attack03.performed += ctx => OnAttack03Performed();
+        _input.Combat.Attack04.performed += ctx => OnAttack04Performed();
+
+        _input.Combat.Pause.performed += ctx => OnPausePerformed();
+
+        _input.Combat.MoveSelectUp.performed += ctx => OnMoveSelectUpPerformed();
+        _input.Combat.MoveSelectUp.performed += ctx => OnMoveSelectDownPerformed();
+        _input.Combat.MoveSelectUp.performed += ctx => OnMoveSelectLeftPerformed();
+        _input.Combat.MoveSelectUp.performed += ctx => OnMoveSelectRightPerformed();
     }
 
     public void Exit()
     {
-        _input.Combat.Attack01.performed -= ctx => HandleAttack01();
-        _input.Combat.Attack02.performed -= ctx => HandleAttack02();
-        _input.Combat.Attack03.performed -= ctx => HandleAttack03();
-        _input.Combat.Attack04.performed -= ctx => HandleAttack04();
-        _input.Combat.Pause.performed -= ctx => HandlePause();
+        _input.Combat.Attack01.performed -= ctx => OnAttack01Performed();
+        _input.Combat.Attack02.performed -= ctx => OnAttack02Performed();
+        _input.Combat.Attack03.performed -= ctx => OnAttack03Performed();
+        _input.Combat.Attack04.performed -= ctx => OnAttack04Performed();
+
+        _input.Combat.Pause.performed -= ctx => OnPausePerformed();
+
+        _input.Combat.MoveSelectUp.performed -= ctx => OnMoveSelectUpPerformed();
+        _input.Combat.MoveSelectUp.performed -= ctx => OnMoveSelectDownPerformed();
+        _input.Combat.MoveSelectUp.performed -= ctx => OnMoveSelectLeftPerformed();
+        _input.Combat.MoveSelectUp.performed -= ctx => OnMoveSelectRightPerformed();
     }
 
     public void Tick()
@@ -37,28 +50,48 @@ public class BattleCombatState : IState
         
     }
 
-    void HandleAttack01()
+    void OnAttack01Performed()
     {
         Debug.Log("Hero 01 perform attack");
     }
 
-    void HandleAttack02()
+    void OnAttack02Performed()
     {
-        Debug.Log("Hero 01 perform attack");
+        Debug.Log("Hero 02 perform attack");
     }
 
-    void HandleAttack03()
+    void OnAttack03Performed()
     {
-        Debug.Log("Hero 01 perform attack");
+        Debug.Log("Hero 03 perform attack");
     }
 
-    void HandleAttack04()
+    void OnAttack04Performed()
     {
-        Debug.Log("Hero 01 perform attack");
+        Debug.Log("Hero 04 perform attack");
     }
 
-    void HandlePause()
+    void OnPausePerformed()
     {
         _stateMachine.ChangeState(_stateMachine.BattlePauseState);
+    }
+
+    void OnMoveSelectUpPerformed()
+    {
+        Debug.Log("Move Cursor Up");
+    }
+
+    void OnMoveSelectDownPerformed()
+    {
+        Debug.Log("Move Cursor Down");
+    }
+
+    void OnMoveSelectLeftPerformed()
+    {
+        Debug.Log("Move Cursor Left");
+    }
+
+    void OnMoveSelectRightPerformed()
+    {
+        Debug.Log("Move Cursor Right");
     }
 }
